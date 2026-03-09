@@ -1,29 +1,30 @@
-import unittest
-from main import calculate_total, apply_discount, is_valid_username
+# main.py
 
-class TestShoppingSystem(unittest.TestCase):
+def calculate_total(price, quantity):
+    """คำนวณราคารวมสินค้า"""
+    if price < 0 or quantity < 0:
+        raise ValueError("ราคาสินค้าและจำนวนต้องไม่ติดลบ")
+    return price * quantity
 
-    # Test ตัวที่ 1: ตรวจสอบการคำนวณราคาปกติ
-    def test_calculate_total_success(self):
-        self.assertEqual(calculate_total(50, 3), 150)
+def apply_discount(total, discount_code):
+    """คำนวณส่วนลดตามโค้ด"""
+    if discount_code == "WELCOME10":
+        return total * 0.9  # ลด 10%
+    elif discount_code == "SUPER50":
+        return total * 0.5  # ลด 50%
+    return total
 
-    # Test ตัวที่ 2: ตรวจสอบ Error เมื่อใส่ค่าติดลบ (ต้องเกิด ValueError)
-    def test_calculate_total_negative_value(self):
-        with self.assertRaises(ValueError):
-            calculate_total(-10, 5)
-
-    # Test ตัวที่ 3: ตรวจสอบการใช้โค้ดส่วนลด 10%
-    def test_apply_discount_welcome(self):
-        self.assertEqual(apply_discount(1000, "WELCOME10"), 900)
-
-    # Test ตัวที่ 4: ตรวจสอบกรณีใส่โค้ดส่วนลดผิด (ราคาต้องเท่าเดิม)
-    def test_apply_discount_invalid_code(self):
-        self.assertEqual(apply_discount(1000, "WRONGCODE"), 1000)
-
-    # Test ตัวที่ 5: ตรวจสอบความถูกต้องของ Username
-    def test_username_validation(self):
-        self.assertTrue(is_valid_username("JenkinsUser"))
-        self.assertFalse(is_valid_username("Hi")) # ชื่อสั้นเกินไป ต้องเป็น False
+def is_valid_username(username):
+    """ตรวจสอบชื่อผู้ใช้ (ต้องยาวกว่า 3 ตัวอักษร)"""
+    return len(username) > 3
 
 if __name__ == "__main__":
-    unittest.main()
+    # จำลองการทำงาน
+    price_item = 100
+    qty = 2
+    total = calculate_total(price_item, qty)
+    final_price = apply_discount(total, "WELCOME10")
+    
+    print(f"--- Shopping System ---")
+    print(f"Total: {total} THB")
+    print(f"Final Price after discount: {final_price} THB")

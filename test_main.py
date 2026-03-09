@@ -1,3 +1,4 @@
+# test_main.py
 import unittest
 from main import calculate_total, apply_discount, is_valid_username
 
