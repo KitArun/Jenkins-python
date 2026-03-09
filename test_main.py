@@ -6,7 +6,7 @@ class TestShoppingSystem(unittest.TestCase):
 
     # Test ตัวที่ 1: ตรวจสอบการคำนวณราคาปกติ
     def test_calculate_total_success(self):
-        self.assertEqual(calculate_total(50, 3), 150)
+        self.assertEqual(calculate_total(60, 3), 150)
 
     # Test ตัวที่ 2: ตรวจสอบ Error เมื่อใส่ค่าติดลบ (ต้องเกิด ValueError)
     def test_calculate_total_negative_value(self):
